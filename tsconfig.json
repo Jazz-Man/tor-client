@@ -7,7 +7,6 @@
 		"exactOptionalPropertyTypes": true,
 		"forceConsistentCasingInFileNames": true,
 		"lib": ["esnext", "DOM"],
-		"preserveSymlinks": false,
 		"resolveJsonModule": true,
 		"strictNullChecks": true
 	},
