@@ -1,6 +1,5 @@
 import { Socket } from "node:net";
-import BaseTCPClient from "./base.ts";
-import type { ITCPClient } from "./types";
+import BaseTCPClient, { type ITCPClient } from "./base.ts";
 
 export class NodeTCPClient extends BaseTCPClient implements ITCPClient {
 	protected declare socket: Socket;

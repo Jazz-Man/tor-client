@@ -1,6 +1,4 @@
-import { connect, type TCPSocket } from "bun";
-import BaseTCPClient from "./base.ts";
-import type { ITCPClient } from "./types";
+import BaseTCPClient, { type ITCPClient } from "./base.ts";
 
 type TReturnPromise = void | Promise<void>;
 
@@ -9,17 +7,17 @@ export class BunTCPClient extends BaseTCPClient implements ITCPClient {
 	private reject: ((data: Buffer) => void) | null = null;
 
 	async connect(host: string, port: number): Promise<void> {
-		this.socket = await connect({
+		this.socket = await Bun.connect({
 			hostname: host,
 			port,
 			socket: {
 				binaryType: "buffer",
-				connectError: (_socket: TCPSocket, error): TReturnPromise => {
+				connectError: (_socket: Bun.TCPSocket, error): TReturnPromise => {
 					console.error(error);
 					throw error;
 				},
-				data: (_socket: TCPSocket, data: Buffer) => this.handleData(data),
-				error: (_socket: TCPSocket, error: Error): TReturnPromise => {
+				data: (_socket: Bun.TCPSocket, data: Buffer) => this.handleData(data),
+				error: (_socket: Bun.TCPSocket, error: Error): TReturnPromise => {
 					console.error(error);
 					throw error;
 				},
